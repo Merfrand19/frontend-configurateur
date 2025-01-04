@@ -1,0 +1,51 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body{
+  height: 100vh;
+    width: 100vw;
+    overflow: hidden
+}
+#root{
+  height: 100%;
+    width: 100%;
+    overflow: auto;
+}
+.text-gradient {
+  font-size: 100px;
+  font-weight: bold;
+  text-transform: uppercase;
+  background: linear-gradient(
+    to right,
+    rgba(0, 0, 0, 0.2) 10%,
+    rgba(0, 0, 0, 0.5) 30%,
+    rgba(0, 0, 0, 1) 50%,
+    rgba(0, 0, 0, 0.5) 70%,
+    rgba(0, 0, 0, 0.1) 90%
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-align: center;
+}
+
+/* Styles spécifiques pour les écrans mobiles */
+@media (max-width: 480px) {
+  .text-gradient {
+    font-size: 70px; /* Taille réduite sur mobile */
+    font-weight: 800; /* Police plus épaisse sur mobile */
+  }
+}
+.submit__button {
+  background: radial-gradient(ellipse at 80% 20%, rgba(254, 133, 12, 0.8) 10%, #000000 60%);
+  color: white;
+  font-size: 16px;
+  font-weight: bold;
+  border: none;
+  border-radius: 6px;
+  padding: 12px 28px;
+  cursor: pointer;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5);
+  text-transform: uppercase;
+  text-align: center;
+}
