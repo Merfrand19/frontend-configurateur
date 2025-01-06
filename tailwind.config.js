@@ -6,6 +6,9 @@ export default {
   ],
   theme: {
     extend: {
+      fontFamily: {
+        poppins: ['Poppins', 'sans-serif'], // Ajoute 'Poppins' avec une police de secours
+      },
       colors: {
         'label-text': '#808080',
         'orange-button': '#FE850C8F',

@@ -3,6 +3,7 @@ import AppLayout from './components/Layout/AppLayout'
 import VisualPanel from './components/Layout/VisualPanel'
 import FormPanel from './components/Layout/FormPanel'
 import { AppContextProvider } from './context/appContext'
+import '@fontsource/poppins'
 
 
 function App() {

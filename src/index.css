@@ -43,9 +43,29 @@ body{
   font-weight: bold;
   border: none;
   border-radius: 6px;
-  padding: 12px 28px;
+  padding: 8px 20px;
   cursor: pointer;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5);
+  /* box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5); */
   text-transform: uppercase;
   text-align: center;
+}
+
+.form__input{
+  border: 1px solid #E6E6E6;
+  background-color: #F7F7F7;
+}
+
+.form__input:focus{
+  outline: none;
+}
+
+.form_label{
+  color: #808080;
+}
+.form_h2{
+  margin-bottom: 15px;
+  font-size: 22px;
+  font-weight: bold;
+  color: #000000;
+
 }
