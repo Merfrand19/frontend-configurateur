@@ -8,6 +8,8 @@ import StepOne from '../Form/StepOne';
 import StepTwo from '../Form/StepTwo';
 import StepThree from '../Form/StepThree';
 import StepFour from '../Form/StepFour';
+import StepFive from '../Form/StepFive';
+import StepSix from '../Form/StepSix';
 
 // Schémas de validation pour chaque étape
 const schemas = [
@@ -32,6 +34,16 @@ const schemas = [
   Yup.object().shape({
     couleur: Yup.string().required('Vous devez sélectionner une couleur'),
   }),
+  Yup.object().shape({
+    matiere: Yup.string().required('Vous devez sélectionner une matière'),
+    finition: Yup.string().required('Vous devez sélectionner une finition'),
+  }),
+  Yup.object().shape({
+    selectedProduct: Yup.number()
+    .typeError("Vous devez sélectionner un produit valide") // Si l'ID n'est pas un nombre
+    .required("Vous devez sélectionner un produit"),
+  })
+  
   
 ];
 
@@ -52,10 +64,14 @@ const FormPanel = () => {
       marque: '',
       modele: '',
       annee: '',
-      address: '',
-      phone: '',
-      preferences: [],
-      country: '',
+      origine: '',
+      gardeBoue: '',
+      moteur: [],
+      pseudo: '',
+      numero :'',
+      couleur : '',
+      finition : '',
+      matiere : '',
     },
   });
 
@@ -92,7 +108,7 @@ const FormPanel = () => {
       <Swiper
         spaceBetween={0}
         slidesPerView={1}
-        // autoHeight={true} 
+        autoHeight={true} 
         allowTouchMove={false} // Empêche les utilisateurs de glisser manuellement
         onSlideChange={(swiper) => handleStepChange(swiper.activeIndex)} // Synchronise `step` avec la slide active
         ref={swiperRef} // Référence pour contrôler la navigation
@@ -111,6 +127,14 @@ const FormPanel = () => {
 
         <SwiperSlide>
           <StepFour control={control} errors={errors} />
+        </SwiperSlide>
+        
+        <SwiperSlide>
+          <StepFive control={control} errors={errors} />
+        </SwiperSlide>
+
+        <SwiperSlide>
+          <StepSix control={control} errors={errors} />
         </SwiperSlide>
       </Swiper>
 

@@ -1,54 +1,3 @@
-// import React, { useState } from 'react';
-
-// const StepFour = ({ control, errors }) => {
-//   const colors = [
-//     { label: 'Rouge', value: 'red', bg: 'bg-red-500' },
-//     { label: 'Bleu', value: 'blue', bg: 'bg-blue-500' },
-//     { label: 'Violet', value: 'purple', bg: 'bg-purple-500' },
-//     { label: 'Blanc', value: 'white', bg: 'bg-gray-200' },
-//     { label: 'Bleu clair', value: 'lightblue', bg: 'bg-sky-500' },
-//     { label: 'Turquoise', value: 'turquoise', bg: 'bg-teal-500' },
-//     { label: 'Jaune', value: 'yellow', bg: 'bg-yellow-500' },
-//     { label: 'Orange', value: 'orange', bg: 'bg-orange-500' },
-//     { label: 'Vert', value: 'green', bg: 'bg-green-500' },
-//     { label: 'Rose', value: 'pink', bg: 'bg-pink-500' },
-//   ];
-
-//   const [selectedColor, setSelectedColor] = useState('');
-
-//   const handleSelectColor = (color) => {
-//     setSelectedColor(color);
-//   };
-
-//   return (
-//     <div className="p-6">
-//       <h2 className='form_h2'>Information sur votre moto</h2>
-//       <div className="grid grid-cols-4 gap-4">
-//         {colors.map((color) => (
-//           <div
-//             key={color.value}
-//             className={`w-24 h-24 flex items-center justify-center rounded border cursor-pointer transition-all ${
-//               color.value === selectedColor
-//                 ? 'border-black shadow-lg'
-//                 : 'border-gray-300'
-//             } ${color.bg}`}
-//             onClick={() => handleSelectColor(color.value)}
-//           >
-//             {color.value === selectedColor && (
-//               <span className="text-white text-xl font-bold">✔</span>
-//             )}
-//           </div>
-//         ))}
-//       </div>
-//       {errors.couleur && (
-//         <p className="text-red-500 text-sm mt-2">{errors.couleur.message}</p>
-//       )}
-//     </div>
-//   );
-// };
-
-// export default StepFour;
-
 // import React from 'react';
 // import { Controller } from 'react-hook-form';
 
@@ -68,28 +17,45 @@
 
 //   return (
 //     <div className="p-6">
-//       <h2 className="text-xl font-bold mb-4 text-center">Choisissez une couleur</h2>
+//       <h2 className="form_h2">Couleur</h2>
+
 //       <Controller
 //         name="couleur"
 //         control={control}
 //         render={({ field }) => (
-//           <div className="grid grid-cols-4 gap-4 justify-items-center">
+//           <div className="grid grid-cols-4 gap-4">
 //             {colors.map((color) => (
 //               <div
 //                 key={color.value}
-//                 className="flex flex-col items-center justify-center cursor-pointer transition-all"
+//                 className={`flex flex-col items-center justify-center cursor-pointer transition-all border rounded-lg ${
+//                   field.value === color.value ? 'border-black shadow-lg scale-105' : 'border-gray-300'
+//                 }`}
+//                 role="radio"
+//                 aria-checked={field.value === color.value}
+//                 tabIndex={0}
+//                 onClick={() => field.onChange(color.value)}
+//                 onKeyDown={(e) => e.key === 'Enter' && field.onChange(color.value)}
 //               >
 //                 <div
-//                   className={`w-24 h-24 rounded-lg flex items-center justify-center border-2
-//                     ${field.value === color.value ? 'border-black shadow-lg' : 'border-gray-300'}`}
-//                   style={{ background: color.gradient }} // Applique le dégradé personnalisé
-//                   onClick={() => field.onChange(color.value)}
+//                   className="w-full h-24 rounded-lg relative"
+//                   style={{
+//                     background: color.gradient,
+//                     borderRadius: '8px',
+//                   }}
 //                 >
 //                   {field.value === color.value && (
-//                     <span className="text-white text-2xl font-bold">✔</span>
+//                     <div className="absolute top-2 right-2 bg-white shadow-md">
+//                       <svg
+//                         xmlns="http://www.w3.org/2000/svg"
+//                         fill="currentColor"
+//                         viewBox="0 0 16 16"
+//                         className="w-5 h-5 text-black"
+//                       >
+//                         <path d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-4 5a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 0 1 1.06-1.06l1.94 1.94 3.64-4.293z" />
+//                       </svg>
+//                     </div>
 //                   )}
 //                 </div>
-//                 {/* Affichage du nom sous chaque couleur */}
 //                 <p className="text-sm text-center mt-1 font-medium">{color.label}</p>
 //               </div>
 //             ))}
@@ -104,6 +70,7 @@
 // };
 
 // export default StepFour;
+
 
 import React from 'react';
 import { Controller } from 'react-hook-form';
@@ -124,28 +91,45 @@ const StepFour = ({ control, errors }) => {
 
   return (
     <div className="p-6">
-      <h2 className='form_h2'>Couleur</h2>
+      <h2 className="form_h2">Couleur</h2>
+
       <Controller
         name="couleur"
         control={control}
         render={({ field }) => (
-          <div className="flex flex-wrap justify-start">
+          <div className="grid grid-cols-4 gap-3">
             {colors.map((color) => (
               <div
                 key={color.value}
-                className="flex flex-col items-center justify-center w-1/4 p-2 cursor-pointer transition-all"
+                className={`flex flex-col items-center justify-center cursor-pointer transition-all border rounded-lg p-1 ${
+                  field.value === color.value ? 'border-black shadow-lg scale-105' : 'border-gray-300'
+                }`}
+                role="radio"
+                aria-checked={field.value === color.value}
+                tabIndex={0}
+                onClick={() => field.onChange(color.value)}
+                onKeyDown={(e) => e.key === 'Enter' && field.onChange(color.value)}
               >
                 <div
-                  className={`w-full h-24 rounded-lg flex items-center justify-center border-2
-                    ${field.value === color.value ? 'border-black shadow-lg' : 'border-gray-300'}`}
-                  style={{ background: color.gradient }} // Applique le dégradé personnalisé
-                  onClick={() => field.onChange(color.value)}
+                  className="w-full h-20 rounded-md relative"
+                  style={{
+                    background: color.gradient,
+                    borderRadius: '8px',
+                  }}
                 >
                   {field.value === color.value && (
-                    <span className="text-white text-2xl font-bold">✔</span>
+                    <div className="absolute top-1 right-1 bg-white shadow-md rounded-full p-1">
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="currentColor"
+                        viewBox="0 0 16 16"
+                        className="w-4 h-4 text-black"
+                      >
+                        <path d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-4 5a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 0 1 1.06-1.06l1.94 1.94 3.64-4.293z" />
+                      </svg>
+                    </div>
                   )}
                 </div>
-                {/* Affichage du nom sous chaque couleur */}
                 <p className="text-sm text-center mt-1 font-medium">{color.label}</p>
               </div>
             ))}
