@@ -70,7 +70,7 @@ const StepFive = ({ control, errors }) => {
         )}
       />
       {errors.matiere && (
-        <p className="text-red-500 text-sm mt-2">{errors.matiere.message}</p>
+        <p className="text-red-500 text-sm mt-1">{errors.matiere.message}</p>
       )}
 
       {/* Sélection de la finition */}
@@ -120,7 +120,7 @@ const StepFive = ({ control, errors }) => {
         )}
       />
       {errors.finition && (
-        <p className="text-red-500 text-sm mt-2">{errors.finition.message}</p>
+        <p className="text-red-500 text-sm mt-1">{errors.finition.message}</p>
       )}
     </div>
   );

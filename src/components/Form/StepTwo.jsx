@@ -1,6 +1,7 @@
 import React from 'react';
 import { Controller } from 'react-hook-form';
 
+
 const StepTwo = ({ control, errors }) => {
   return (
     <div className="mb-4">
@@ -17,10 +18,6 @@ const StepTwo = ({ control, errors }) => {
                           {...field}
                           id="origine"
                           className="form__input p-2 w-full "
-                          onBlur={(e) => {
-                            field.onBlur(); 
-                            setBrand(e.target.value);
-                          }}
                         >
                           <option value="">origine</option>
                           <option value="Aprilia">Aprilia</option>
@@ -49,10 +46,6 @@ const StepTwo = ({ control, errors }) => {
                     {...field}
                     id="gardeBoue"
                     className="form__input p-2 w-full "
-                    onBlur={(e) => {
-                      field.onBlur(); 
-                      setBrand(e.target.value);
-                    }}
                   >
                     <option value="">Garde Boue</option>
                     <option value="Aprilia">Aprilia</option>

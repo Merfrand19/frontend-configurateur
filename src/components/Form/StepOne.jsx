@@ -47,7 +47,7 @@ const StepOne = ({ control, errors }) => {
           <input {...field} id="modele" className="p-2 w-full form__input" />
         )}
       />
-      {errors.modele && <p className="text-red-500">{errors.modele.message}</p>}
+      {errors.modele && <p className="text-red-500 text-sm mt-1">{errors.modele.message}</p>}
     </div>
 
     <div className="mb-4">
@@ -59,7 +59,7 @@ const StepOne = ({ control, errors }) => {
           <input {...field} id="annee" className="p-2 w-full form__input" />
         )}
       />
-      {errors.annee && <p className="text-red-500">{errors.annee.message}</p>}
+      {errors.annee && <p className="text-red-500 text-sm mt-1">{errors.annee.message}</p>}
     </div>
   </div>
   );

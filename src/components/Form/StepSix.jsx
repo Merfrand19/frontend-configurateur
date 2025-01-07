@@ -64,7 +64,7 @@ const StepSix = ({ control, errors }) => {
         )}
       />
       {errors.selectedProduct && (
-        <p className="text-red-500 text-sm mt-2">{errors.selectedProduct.message}</p>
+        <p className="text-red-500 text-sm mt-1">{errors.selectedProduct.message}</p>
       )}
     </div>
   );
