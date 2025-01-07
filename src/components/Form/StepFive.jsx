@@ -5,7 +5,7 @@ import chromeImage from '../../assets/chrome.png';
 import holographiqueImage from '../../assets/holographique.png';
 import brillanteImage from '../../assets/brillante.png';
 import matteImage from '../../assets/matte.png';
-import pailleteeImage from '../../assets/pailletee.png';
+import pailleteeImage from '../../assets/Pailletee.png';
 
 const StepFive = ({ control, errors }) => {
   const materials = [
