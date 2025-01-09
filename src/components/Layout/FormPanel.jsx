@@ -172,9 +172,17 @@ const FormPanel = ({ onSubmitRef }) => {
           </button>
         </div>
       </div>
-        <div className="hidden lg:flex lg:w-[8%] lg:h-full relative ">
-        <div className="absolute top-1/2 -translate-y-1/2 w-full h-[50%] rounded-full bg-gray-300"></div>
-        <div className="absolute top-0 right-0 w-1/2 h-full bg-gray-300 z-0"></div>
+        <div className="hidden lg:flex lg:w-[6%] lg:h-full relative ">
+        {/* <div className="absolute top-1/2 -translate-y-1/2 w-full h-[50%] rounded-full bg-[#D9D9D9]"></div> */}
+        <div className="absolute top-1/2 -translate-y-1/2 w-full h-[50%] bg-gray-300"
+     style={{
+        borderTopLeftRadius: '20px',
+        borderTopRightRadius: '-50px',
+        borderBottomLeftRadius: '20px',
+        borderBottomRightRadius: '-10px'
+     }}></div>
+        <div className="absolute top-0 right-0 w-1/3 h-full bg-[#D9D9D9] z-0"></div>
+        
         <div className="absolute inset-0 flex flex-col items-center justify-center gap-6 z-10">
           <StepIndicator
             currentStep={step}
