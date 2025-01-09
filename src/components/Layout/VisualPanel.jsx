@@ -10,7 +10,6 @@ const VisualPanel = ({ triggerFormSubmit, setIsVisualExpanded, isVisualExpanded 
 
   return (
     <div
-{/*       className="bg-cover bg-center h-full w-full" */}
     className={`bg-cover bg-center w-full h-full ${isVisualExpanded ? 'h-screen lg:h-full' : ''}`}
       style={{ backgroundImage: `url(${bgGarage})` }}
     >
