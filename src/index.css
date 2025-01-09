@@ -69,3 +69,16 @@ body{
   color: #000000;
 
 }
+
+.step-indicator-container {
+  background-color: #d9d9d9;
+  border-top-left-radius: 50px;
+  border-bottom-left-radius: 50px;
+  width: 100%; /* Pour prendre la largeur du conteneur parent */
+  height: 100%; /* Pour correspondre à la hauteur de l'écran */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden; /* Assurez-vous que le contenu reste bien centré */
+}

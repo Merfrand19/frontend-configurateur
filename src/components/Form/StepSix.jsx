@@ -13,7 +13,7 @@ const StepSix = ({ control, errors }) => {
   ];
 
   return (
-    <div className="p-6">
+    <div className="p-2">
       <h2 className="form_h2 mb-4">Ajouter des options</h2>
 
       {/* Sélection des produits */}

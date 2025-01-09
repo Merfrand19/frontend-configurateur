@@ -21,7 +21,7 @@ const StepFive = ({ control, errors }) => {
   ];
 
   return (
-    <div className="p-6">
+    <div className="p-2">
       <h2 className="form_h2">Matière</h2>
 
       {/* Sélection de la matière */}

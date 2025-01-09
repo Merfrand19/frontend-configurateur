@@ -101,7 +101,7 @@ const StepFour = ({ control, errors }) => {
   ];
 
   return (
-    <div className="p-6">
+    <div className="p-2">
       <h2 className="form_h2">Couleur</h2>
 
       <Controller
