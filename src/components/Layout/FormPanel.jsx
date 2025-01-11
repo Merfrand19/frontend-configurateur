@@ -41,9 +41,11 @@ const schemas = [
     finition: Yup.string().required('Vous devez sélectionner une finition'),
   }),
   Yup.object().shape({
-    selectedProduct: Yup.number()
-      .typeError("Vous devez sélectionner un produit valide")
-      .required("Vous devez sélectionner un produit"),
+    // selectedProduct: Yup.number()
+    //   .typeError("Vous devez sélectionner un produit valide")
+    //   .required("Vous devez sélectionner un produit"),
+    selectedProduct : Yup.array()
+      .min(1, 'Vous devez choisir un moteur')
   }),
 ];
 
@@ -82,6 +84,17 @@ const FormPanel = ({ onSubmitRef }) => {
       swiperRef.current.swiper.slideTo(newStep);
     }
   };
+  const handleStepClick = async (stepId) => {
+    if( step > stepId){
+      setStep(stepId); 
+      if (swiperRef?.current?.swiper) {
+        swiperRef.current.swiper.slideTo(stepId); 
+      }
+    }
+    else{
+      console.log('erreur')
+    }
+  };
 
   const onSubmit = async () => {
     const isValid = await trigger();
@@ -115,6 +128,7 @@ const FormPanel = ({ onSubmitRef }) => {
       <div className="block lg:hidden w-[90%] mx-auto mb-4 border-b border-gray-200 pb-4 pt-4">
         <StepIndicator
           currentStep={step}
+          setCurrentStep={handleStepClick}
           direction="horizontal"
           containerClasses="w-full"
         />
@@ -186,6 +200,7 @@ const FormPanel = ({ onSubmitRef }) => {
         <div className="absolute inset-0 flex flex-col items-center justify-center gap-6 z-10">
           <StepIndicator
             currentStep={step}
+            setCurrentStep={handleStepClick}
             direction="vertical"
             containerClasses="flex flex-col items-center gap-6"
           />

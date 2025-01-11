@@ -12,7 +12,7 @@ import GridOldIcon from '../../assets/grid_old.svg';
 import SlidersIcon from '../../assets/sliders.svg';
 import SlidersOldIcon from '../../assets/sliders_old.svg';
 
-const StepIndicator = ({ currentStep, direction = 'vertical', containerClasses = '' }) => {
+const StepIndicator = ({ currentStep, setCurrentStep, direction = 'vertical', containerClasses = '' }) => {
   const steps = [
     { icon: BikeIcon, iconOld: BikeOldIcon, id: 0 },
     { icon: ToothIcon, iconOld: ToothOldIcon, id: 1 },
@@ -35,11 +35,13 @@ const StepIndicator = ({ currentStep, direction = 'vertical', containerClasses =
           alt={`Step ${step.id + 1}`}
           className={`w-8 h-8 transition-all duration-300 lg:w-6 lg:h-6`}
           style={{
+            cursor: currentStep >= step.id ? 'pointer' : 'not-allowed',
             filter:
               currentStep >= step.id
                 ? 'none'
                 : 'grayscale(100%) brightness(0.7) opacity(0.5)',
             }}
+          onClick={() => setCurrentStep(step.id)} 
         />
       ))}
     </div>
