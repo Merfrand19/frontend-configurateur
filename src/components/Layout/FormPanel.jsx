@@ -1,51 +1,53 @@
-import React, { useState, useRef, useEffect } from 'react';
-import { useForm } from 'react-hook-form';
-import * as Yup from 'yup';
-import { yupResolver } from '@hookform/resolvers/yup';
-import { Swiper, SwiperSlide } from 'swiper/react';
-import 'swiper/css';
-import StepOne from '../Form/StepOne';
-import StepTwo from '../Form/StepTwo';
-import StepThree from '../Form/StepThree';
-import StepFour from '../Form/StepFour';
-import StepFive from '../Form/StepFive';
-import StepSix from '../Form/StepSix';
-import StepIndicator from '../UI/stepIndicator';
+import React, { useState, useRef, useEffect } from "react";
+import { useForm } from "react-hook-form";
+import * as Yup from "yup";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { Swiper, SwiperSlide } from "swiper/react";
+import "swiper/css";
+import StepOne from "../Form/StepOne";
+import StepTwo from "../Form/StepTwo";
+import StepThree from "../Form/StepThree";
+import StepFour from "../Form/StepFour";
+import StepFive from "../Form/StepFive";
+import StepSix from "../Form/StepSix";
+import StepIndicator from "../UI/stepIndicator";
 
 const schemas = [
   Yup.object().shape({
-    marque: Yup.string().required('La marque est requise'),
-    modele: Yup.string().required('Le modèle est requis'),
+    marque: Yup.string().required("La marque est requise"),
+    modele: Yup.string().required("Le modèle est requis"),
     annee: Yup.number()
       .typeError("L'année doit être un nombre valide")
       .min(1900, "L'année doit être supérieure ou égale à 1900")
-      .max(new Date().getFullYear(), "L'année ne peut pas être supérieure à l'année actuelle")
+      .max(
+        new Date().getFullYear(),
+        "L'année ne peut pas être supérieure à l'année actuelle"
+      )
       .required("L'année est obligatoire"),
   }),
   Yup.object().shape({
     origine: Yup.string().required("L'origine est requise"),
-    gardeBoue: Yup.string().required('La GardeBoue est requise'),
+    gardeBoue: Yup.string().required("La GardeBoue est requise"),
     moteur: Yup.array()
-      .min(1, 'Vous devez choisir un moteur')
-      .max(1, 'Vous devez choisir un seul moteur'),
+      .min(1, "Vous devez choisir un moteur")
+      .max(1, "Vous devez choisir un seul moteur"),
   }),
   Yup.object().shape({
-    pseudo: Yup.string().required('Le pseudo est requis'),
+    pseudo: Yup.string().required("Le pseudo est requis"),
     numero: Yup.number().typeError("Le numéro doit être un nombre valide"),
   }),
   Yup.object().shape({
-    couleur: Yup.string().required('Vous devez sélectionner une couleur'),
+    couleur: Yup.string().required("Vous devez sélectionner une couleur"),
   }),
   Yup.object().shape({
-    matiere: Yup.string().required('Vous devez sélectionner une matière'),
-    finition: Yup.string().required('Vous devez sélectionner une finition'),
+    matiere: Yup.string().required("Vous devez sélectionner une matière"),
+    finition: Yup.string().required("Vous devez sélectionner une finition"),
   }),
   Yup.object().shape({
     // selectedProduct: Yup.number()
     //   .typeError("Vous devez sélectionner un produit valide")
     //   .required("Vous devez sélectionner un produit"),
-    selectedProduct : Yup.array()
-      .min(1, 'Vous devez choisir un moteur')
+    selectedProduct: Yup.array().min(1, "Vous devez choisir un moteur"),
   }),
 ];
 
@@ -63,17 +65,17 @@ const FormPanel = ({ onSubmitRef }) => {
   } = useForm({
     resolver: yupResolver(schemas[step]),
     defaultValues: {
-      marque: '',
-      modele: '',
-      annee: '',
-      origine: '',
-      gardeBoue: '',
+      marque: "",
+      modele: "",
+      annee: "",
+      origine: "",
+      gardeBoue: "",
       moteur: [],
-      pseudo: '',
-      numero: '',
-      couleur: '',
-      finition: '',
-      matiere: '',
+      pseudo: "",
+      numero: "",
+      couleur: "",
+      finition: "",
+      matiere: "",
     },
   });
 
@@ -85,14 +87,13 @@ const FormPanel = ({ onSubmitRef }) => {
     }
   };
   const handleStepClick = async (stepId) => {
-    if( step > stepId){
-      setStep(stepId); 
+    if (step > stepId) {
+      setStep(stepId);
       if (swiperRef?.current?.swiper) {
-        swiperRef.current.swiper.slideTo(stepId); 
+        swiperRef.current.swiper.slideTo(stepId);
       }
-    }
-    else{
-      console.log('erreur')
+    } else {
+      console.log("erreur");
     }
   };
 
@@ -103,10 +104,12 @@ const FormPanel = ({ onSubmitRef }) => {
         handleStepChange(step + 1);
       } else {
         const data = getValues();
-        console.log('Données soumises :', data);
+        console.log("Données soumises avec React:", data);
+        const event = new CustomEvent("formulaireSoumis", { content: data });
+        window.parent.document.dispatchEvent(event);
       }
     } else {
-      console.log('Erreur : veuillez corriger les champs avant de continuer.');
+      console.log("Erreur : veuillez corriger les champs avant de continuer.");
     }
   };
 
@@ -171,8 +174,8 @@ const FormPanel = ({ onSubmitRef }) => {
             disabled={step <= 0}
             className={`py-2 px-4 rounded ${
               step > 0
-                ? 'bg-gray-300 text-black'
-                : 'bg-gray-200 text-gray-500 cursor-not-allowed'
+                ? "bg-gray-300 text-black"
+                : "bg-gray-200 text-gray-500 cursor-not-allowed"
             }`}
           >
             Précédent
@@ -182,21 +185,23 @@ const FormPanel = ({ onSubmitRef }) => {
             onClick={handleSubmit(onSubmit)}
             className="py-2 px-4 rounded submit__button"
           >
-            {step === schemas.length - 1 ? 'Terminer' : 'Suivant'}
+            {step === schemas.length - 1 ? "Terminer" : "Suivant"}
           </button>
         </div>
       </div>
-        <div className="hidden lg:flex lg:w-[6%] lg:h-full relative ">
+      <div className="hidden lg:flex lg:w-[6%] lg:h-full relative ">
         {/* <div className="absolute top-1/2 -translate-y-1/2 w-full h-[50%] rounded-full bg-[#D9D9D9]"></div> */}
-        <div className="absolute top-1/2 -translate-y-1/2 w-full h-[50%] bg-gray-300"
-     style={{
-        borderTopLeftRadius: '20px',
-        borderTopRightRadius: '-50px',
-        borderBottomLeftRadius: '20px',
-        borderBottomRightRadius: '-10px'
-     }}></div>
+        <div
+          className="absolute top-1/2 -translate-y-1/2 w-full h-[50%] bg-gray-300"
+          style={{
+            borderTopLeftRadius: "20px",
+            borderTopRightRadius: "-50px",
+            borderBottomLeftRadius: "20px",
+            borderBottomRightRadius: "-10px",
+          }}
+        ></div>
         <div className="absolute top-0 right-0 w-1/3 h-full bg-[#D9D9D9] z-0"></div>
-        
+
         <div className="absolute inset-0 flex flex-col items-center justify-center gap-6 z-10">
           <StepIndicator
             currentStep={step}
@@ -211,13 +216,3 @@ const FormPanel = ({ onSubmitRef }) => {
 };
 
 export default FormPanel;
-
-
-
-
-
-
-
-
-
-
