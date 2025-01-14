@@ -105,8 +105,7 @@ const FormPanel = ({ onSubmitRef }) => {
       } else {
         const data = getValues();
         console.log("Données soumises avec React:", data);
-        const event = new CustomEvent("formulaireSoumis", { content: data });
-        window.parent.document.dispatchEvent(event);
+        window.top.postMessage(data, "*");
       }
     } else {
       console.log("Erreur : veuillez corriger les champs avant de continuer.");
