@@ -9,15 +9,15 @@ import pailleteeImage from '../../assets/Pailletee.png';
 
 const StepFive = ({ control, errors }) => {
   const materials = [
-    { label: 'Basique', value: 'basique', image: basiqueImage },
-    { label: 'Chrome', value: 'chrome', image: chromeImage },
-    { label: 'Holographique', value: 'holographique', image: holographiqueImage },
+    { label: 'Basique', value: 'basique', image: basiqueImage, idProduct: '0' },
+    { label: 'Chrome', value: 'chrome', image: chromeImage, idProduct: '8382191435931' },
+    { label: 'Holographique', value: 'holographique', image: holographiqueImage, idProduct: '8382193287899' },
   ];
 
   const finishes = [
-    { label: 'Brillante', value: 'brillante', image: brillanteImage },
-    { label: 'Matte', value: 'matte', image: matteImage },
-    { label: 'Pailletée', value: 'pailletee', image: pailleteeImage },
+    { label: 'Brillante', value: 'brillante', image: brillanteImage, idProduct: '0' },
+    { label: 'Matte', value: 'matte', image: matteImage, idProduct: '45982626152603' },
+    { label: 'Pailletée', value: 'pailletee', image: pailleteeImage, idProduct: '45982631133339' },
   ];
 
   return (
@@ -30,48 +30,53 @@ const StepFive = ({ control, errors }) => {
         control={control}
         render={({ field }) => (
           <div className="flex flex-nowrap justify-start gap-4 mb-6">
-            {materials.map((material) => (
-              <div
-                key={material.value}
-                className={`flex flex-col items-center justify-center w-1/3 p-2 cursor-pointer transition-all border rounded-lg ${
-                  field.value === material.value ? 'border-black shadow-lg scale-105' : 'border-gray-300'
-                }`}
-                role="radio"
-                aria-checked={field.value === material.value}
-                tabIndex={0}
-                onClick={() => field.onChange(material.value)}
-                onKeyDown={(e) => e.key === 'Enter' && field.onChange(material.value)}
-              >
+            {materials.map((material) => {
+              const valueToStore = `${material.label} - ${material.idProduct}`;
+              const isSelected = field.value === valueToStore;
+
+              return (
                 <div
-                  className="w-full h-24 relative"
-                  style={{
-                    backgroundImage: `url(${material.image})`,
-                    backgroundSize: 'cover',
-                    backgroundPosition: 'center',
-                  }}
+                  key={material.value}
+                  className={`flex flex-col items-center justify-center w-1/3 p-2 cursor-pointer transition-all border rounded-lg ${
+                    isSelected ? 'border-black shadow-lg scale-105' : 'border-gray-300'
+                  }`}
+                  role="radio"
+                  aria-checked={isSelected}
+                  tabIndex={0}
+                  onClick={() => field.onChange(valueToStore)}
+                  onKeyDown={(e) => e.key === 'Enter' && field.onChange(valueToStore)}
                 >
-                  {field.value === material.value && (
-                    <div className="absolute top-2 right-2 bg-white shadow-md">
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        fill="currentColor"
-                        viewBox="0 0 16 16"
-                        className="w-5 h-5 text-black"
-                      >
-                        <path d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-4 5a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 0 1 1.06-1.06l1.94 1.94 3.64-4.293z" />
-                      </svg>
-                    </div>
-                  )}
+                  <div
+                    className="w-full h-24 relative"
+                    style={{
+                      backgroundImage: `url(${material.image})`,
+                      backgroundSize: 'cover',
+                      backgroundPosition: 'center',
+                    }}
+                  >
+                    {isSelected && (
+                      <div className="absolute top-2 right-2 bg-white shadow-md">
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          fill="currentColor"
+                          viewBox="0 0 16 16"
+                          className="w-5 h-5 text-black"
+                        >
+                          <path d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-4 5a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 0 1 1.06-1.06l1.94 1.94 3.64-4.293z" />
+                        </svg>
+                      </div>
+                    )}
+                  </div>
+                  <p className="text-sm text-center mt-1 font-medium">
+                    {material.label}
+                  </p>
                 </div>
-                <p className="text-sm text-center mt-1 font-medium">{material.label}</p>
-              </div>
-            ))}
+              );
+            })}
           </div>
         )}
       />
-      {errors.matiere && (
-        <p className="text-red-500 text-sm mt-1">{errors.matiere.message}</p>
-      )}
+      {errors.matiere && <p className="text-red-500 text-sm mt-1">{errors.matiere.message}</p>}
 
       {/* Sélection de la finition */}
       <h2 className="form_h2 mt-4">Finition</h2>
@@ -80,48 +85,53 @@ const StepFive = ({ control, errors }) => {
         control={control}
         render={({ field }) => (
           <div className="flex flex-nowrap justify-start gap-4">
-            {finishes.map((finish) => (
-              <div
-                key={finish.value}
-                className={`flex flex-col items-center justify-center w-1/3 p-2 cursor-pointer transition-all border rounded-lg ${
-                  field.value === finish.value ? 'border-black shadow-lg scale-105' : 'border-gray-300'
-                }`}
-                role="radio"
-                aria-checked={field.value === finish.value}
-                tabIndex={0}
-                onClick={() => field.onChange(finish.value)}
-                onKeyDown={(e) => e.key === 'Enter' && field.onChange(finish.value)}
-              >
+            {finishes.map((finish) => {
+              const valueToStore = `${finish.label} - ${finish.idProduct}`;
+              const isSelected = field.value === valueToStore;
+
+              return (
                 <div
-                  className="w-full h-24 relative"
-                  style={{
-                    backgroundImage: `url(${finish.image})`,
-                    backgroundSize: 'cover',
-                    backgroundPosition: 'center',
-                  }}
+                  key={finish.value}
+                  className={`flex flex-col items-center justify-center w-1/3 p-2 cursor-pointer transition-all border rounded-lg ${
+                    isSelected ? 'border-black shadow-lg scale-105' : 'border-gray-300'
+                  }`}
+                  role="radio"
+                  aria-checked={isSelected}
+                  tabIndex={0}
+                  onClick={() => field.onChange(valueToStore)}
+                  onKeyDown={(e) => e.key === 'Enter' && field.onChange(valueToStore)}
                 >
-                  {field.value === finish.value && (
-                    <div className="absolute top-2 right-2 bg-white shadow-md">
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        fill="currentColor"
-                        viewBox="0 0 16 16"
-                        className="w-5 h-5 text-black"
-                      >
-                        <path d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-4 5a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 0 1 1.06-1.06l1.94 1.94 3.64-4.293z" />
-                      </svg>
-                    </div>
-                  )}
+                  <div
+                    className="w-full h-24 relative"
+                    style={{
+                      backgroundImage: `url(${finish.image})`,
+                      backgroundSize: 'cover',
+                      backgroundPosition: 'center',
+                    }}
+                  >
+                    {isSelected && (
+                      <div className="absolute top-2 right-2 bg-white shadow-md">
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          fill="currentColor"
+                          viewBox="0 0 16 16"
+                          className="w-5 h-5 text-black"
+                        >
+                          <path d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-4 5a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 0 1 1.06-1.06l1.94 1.94 3.64-4.293z" />
+                        </svg>
+                      </div>
+                    )}
+                  </div>
+                  <p className="text-sm text-center mt-1 font-medium">
+                    {finish.label}
+                  </p>
                 </div>
-                <p className="text-sm text-center mt-1 font-medium">{finish.label}</p>
-              </div>
-            ))}
+              );
+            })}
           </div>
         )}
       />
-      {errors.finition && (
-        <p className="text-red-500 text-sm mt-1">{errors.finition.message}</p>
-      )}
+      {errors.finition && <p className="text-red-500 text-sm mt-1">{errors.finition.message}</p>}
     </div>
   );
 };

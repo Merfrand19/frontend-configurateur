@@ -1,97 +1,97 @@
-// import React from 'react';
-// import { Controller } from 'react-hook-form';
-// import productImage from '../../assets/product.png';
+import React, { useEffect, useState } from "react";
+import { Controller } from "react-hook-form";
+import { gql, useQuery, useApolloClient } from "@apollo/client";
 
-// const StepSix = ({ control, errors }) => {
-//   // Liste des produits simulés
-//   const products = [
-//     { id: '1', name: 'Kit déco bâton fourche', price: '100€', image: productImage },
-//     { id: '2', name: 'Kit déco bâton fourche', price: '100€', image: productImage },
-//     { id: '3', name: 'Kit déco bâton fourche', price: '100€', image: productImage },
-//     { id: '4', name: 'Kit déco bâton fourche', price: '100€', image: productImage },
-//     { id: '5', name: 'Kit déco bâton fourche', price: '100€', image: productImage },
-//   ];
+const GET_OPTION_PRODUCTS_METAOBJECT = gql`
+  query {
+    metaobjects(type: "produit_en_option", first: 10) {
+      edges {
+        node {
+          id
+          fields {
+            key
+            value
+          }
+        }
+      }
+    }
+  }
+`;
 
-//   return (
-//     <div className="p-2">
-//       <h2 className="form_h2 mb-4">Ajouter des options</h2>
-
-//       {/* Sélection des produits */}
-//       <Controller
-//         name="selectedProduct"
-//         control={control}
-//         render={({ field }) => (
-//           <div className="grid grid-cols-2 md:grid-cols-3 gap-4 mb-6">
-//             {products.map((product) => (
-//               <div
-//                 key={product.id}
-//                 className={`flex flex-col items-center justify-center cursor-pointer transition-all border rounded-lg ${
-//                   field.value === product.id ? 'border-black shadow-lg scale-105' : 'border-gray-300'
-//                 }`}
-//                 role="radio"
-//                 aria-checked={field.value === product.id}
-//                 tabIndex={0}
-//                 onClick={() => field.onChange(product.id)}
-//                 onKeyDown={(e) => e.key === 'Enter' && field.onChange(product.id)}
-//               >
-//                 <div
-//                   className="w-full h-24 relative"
-//                   style={{
-//                     backgroundImage: `url(${product.image})`,
-//                     backgroundSize: 'contain',
-//                     backgroundPosition: 'center',
-//                     backgroundRepeat: 'no-repeat',
-//                   }}
-//                 >
-//                   {field.value === product.id && (
-//                     <div className="absolute top-2 right-2 bg-white shadow-md">
-//                       <svg
-//                         xmlns="http://www.w3.org/2000/svg"
-//                         fill="currentColor"
-//                         viewBox="0 0 16 16"
-//                         className="w-5 h-5 text-black"
-//                       >
-//                         <path d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-4 5a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 0 1 1.06-1.06l1.94 1.94 3.64-4.293z" />
-//                       </svg>
-//                     </div>
-//                   )}
-//                 </div>
-//                 <p className="text-sm text-center mt-2 font-medium">{product.name}</p>
-//                 <p className="text-sm text-center text-gray-500">{product.price}</p>
-//               </div>
-//             ))}
-//           </div>
-//         )}
-//       />
-//       {errors.selectedProduct && (
-//         <p className="text-red-500 text-sm mt-1">{errors.selectedProduct.message}</p>
-//       )}
-//     </div>
-//   );
-// };
-
-// export default StepSix;
-
-
-import React from 'react';
-import { Controller } from 'react-hook-form';
-import productImage from '../../assets/product.png';
+const GET_PRODUCT_DETAILS = gql`
+  query GetProductDetails($id: ID!) {
+    product(id: $id) {
+      id
+      title
+      priceRange {
+        minVariantPrice {
+          amount
+          currencyCode
+        }
+      }
+      featuredImage {
+        url
+      }
+    }
+  }
+`;
 
 const StepSix = ({ control, errors }) => {
-  // Liste des produits simulés
-  const products = [
-    { id: '1', name: 'Kit déco bâton fourche', price: '100€', image: productImage },
-    { id: '2', name: 'Kit déco bâton fourche', price: '100€', image: productImage },
-    { id: '3', name: 'Kit déco bâton fourche', price: '100€', image: productImage },
-    { id: '4', name: 'Kit déco bâton fourche', price: '100€', image: productImage },
-    { id: '5', name: 'Kit déco bâton fourche', price: '100€', image: productImage },
-  ];
+  const client = useApolloClient();
+  const { data, loading, error } = useQuery(GET_OPTION_PRODUCTS_METAOBJECT);
+  const [products, setProducts] = useState([]);
+
+  useEffect(() => {
+    const extractNumericId = (globalId) => {
+      const match = globalId.match(/Product\/(\d+)/);
+      return match ? match[1] : globalId; // Retourne l'ID numérique ou le globalId si pas de correspondance
+    };
+
+    const fetchProductDetails = async (productId) => {
+      try {
+        const { data } = await client.query({
+          query: GET_PRODUCT_DETAILS,
+          variables: { id: productId },
+        });
+
+        return {
+          id: extractNumericId(data.product.id), // Extraction de l'ID numérique
+          name: data.product.title,
+          price: `${data.product.priceRange.minVariantPrice.amount} ${data.product.priceRange.minVariantPrice.currencyCode}`,
+          image: data.product.featuredImage?.url || "https://via.placeholder.com/150",
+        };
+      } catch (error) {
+        console.error(`Erreur lors de la récupération des détails du produit ${productId}:`, error);
+        return null;
+      }
+    };
+
+    const loadProducts = async () => {
+      if (data) {
+        const productsPromises = data.metaobjects.edges.map(async ({ node }) => {
+          const productIdField = node.fields.find((field) => field.key === "product");
+          if (productIdField) {
+            return fetchProductDetails(productIdField.value);
+          }
+          return null;
+        });
+
+        const resolvedProducts = await Promise.all(productsPromises);
+        setProducts(resolvedProducts.filter((product) => product !== null));
+      }
+    };
+
+    loadProducts();
+    console.log("products", products)
+  }, [data, client]);
+
+  if (loading) return <p>Chargement des options...</p>;
+  if (error) return <p>Erreur : {error.message}</p>;
 
   return (
     <div className="p-2">
       <h2 className="form_h2 mb-4">Ajouter des options</h2>
 
-      {/* Sélection des produits */}
       <Controller
         name="selectedProducts"
         control={control}
@@ -104,7 +104,7 @@ const StepSix = ({ control, errors }) => {
                 <div
                   key={product.id}
                   className={`flex flex-col items-center justify-center cursor-pointer transition-all border rounded-lg ${
-                    isSelected ? 'border-black shadow-lg scale-105' : 'border-gray-300'
+                    isSelected ? "border-black shadow-lg scale-105" : "border-gray-300"
                   }`}
                   role="checkbox"
                   aria-checked={isSelected}
@@ -116,7 +116,7 @@ const StepSix = ({ control, errors }) => {
                     field.onChange(updatedValue);
                   }}
                   onKeyDown={(e) => {
-                    if (e.key === 'Enter') {
+                    if (e.key === "Enter") {
                       const updatedValue = isSelected
                         ? field.value.filter((id) => id !== product.id)
                         : [...(field.value || []), product.id];
@@ -124,28 +124,23 @@ const StepSix = ({ control, errors }) => {
                     }
                   }}
                 >
-                  <div
-                    className="w-full h-24 relative"
-                    style={{
-                      backgroundImage: `url(${product.image})`,
-                      backgroundSize: 'contain',
-                      backgroundPosition: 'center',
-                      backgroundRepeat: 'no-repeat',
-                    }}
-                  >
-                    {isSelected && (
-                      <div className="absolute top-2 right-2 bg-white shadow-md">
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          fill="currentColor"
-                          viewBox="0 0 16 16"
-                          className="w-5 h-5 text-black"
-                        >
-                          <path d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-4 5a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 0 1 1.06-1.06l1.94 1.94 3.64-4.293z" />
-                        </svg>
-                      </div>
-                    )}
-                  </div>
+                  <img
+                    src={product.image}
+                    alt={product.name}
+                    className="w-full h-24 object-cover rounded-lg"
+                  />
+                  {isSelected && (
+                    <div className="absolute top-2 right-2 bg-white shadow-md">
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="currentColor"
+                        viewBox="0 0 16 16"
+                        className="w-5 h-5 text-black"
+                      >
+                        <path d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-4 5a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 0 1 1.06-1.06l1.94 1.94 3.64-4.293z" />
+                      </svg>
+                    </div>
+                  )}
                   <p className="text-sm text-center mt-2 font-medium">{product.name}</p>
                   <p className="text-sm text-center text-gray-500">{product.price}</p>
                 </div>

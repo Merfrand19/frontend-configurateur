@@ -1,9 +1,44 @@
-import React from "react";
+// src/components/StepOne.jsx
+
+import React, { useState, useEffect } from "react";
 import { Controller } from "react-hook-form";
 import { useLayoutContext } from "../../context/appContext";
+import { gql, useQuery } from "@apollo/client";
 
+const GET_BRANDS = gql`
+  query {
+    metaobjects(type: "brands", first: 16) {
+      edges {
+        node {
+          id
+          fields {
+            key
+            value
+          }
+        }
+      }
+    }
+  }
+`;
 const StepOne = ({ control, errors }) => {
   const { setBrand } = useLayoutContext();
+  const { data, loading, error } = useQuery(GET_BRANDS);
+  const [brands, setBrands] = useState([]);
+
+  useEffect(() => {
+    if (data) {
+      // Filtrer les noms des marques depuis la réponse GraphQL
+      const fetchedBrands = data.metaobjects.edges.map((edge) => {
+        const nameField = edge.node.fields.find((field) => field.key === "name");
+        return nameField ? nameField.value : null;
+      }).filter(Boolean); // Éliminer les valeurs null
+      setBrands(fetchedBrands);
+    }
+  }, [data]);
+
+  // if (loading) return <p>Chargement des marques...</p>;
+  // if (error) return <p>Erreur lors de la récupération des marques: {error.message}</p>;
+
   return (
     <div className="mb-4">
       <h2 className="form_h2">Information sur votre moto</h2>
@@ -22,21 +57,18 @@ const StepOne = ({ control, errors }) => {
             <select
               {...field}
               id="marque"
-              className="form__input p-2 w-full "
+              className="form__input p-2 w-full"
               onBlur={(e) => {
                 field.onBlur();
                 setBrand(e.target.value);
               }}
             >
-              <option value="">Marque</option>
-              <option value="Aprilia">Aprilia</option>
-              <option value="Beta">Beta</option>
-              <option value="CPI">CPI</option>
-              <option value="Derbi">Derbi</option>
-              <option value="Fantic">Fantic</option>
-              <option value="Generic">Generic</option>
-              <option value="Honda">Honda</option>
-              <option value="MBK">MBK</option>
+              <option value="">Sélectionnez une marque</option>
+              {brands.map((brand, index) => (
+                <option key={index} value={brand}>
+                  {brand}
+                </option>
+              ))}
             </select>
           )}
         />

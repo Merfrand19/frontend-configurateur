@@ -25,10 +25,10 @@ const VisualPanel = ({ triggerFormSubmit, setIsVisualExpanded, isVisualExpanded 
               <img src={bike} alt="Bike" className="bike md:w-[100%] lg:w-[80%]" />
             </div>
             <div className="flex justify-between">
-              <ButtonExpand
+              {/* <ButtonExpand
                 setIsVisualExpanded={setIsVisualExpanded}
                 isVisualExpanded={isVisualExpanded}
-              />
+              /> */}
               {isVisualExpanded && (
                 <SubmitButton onClick={triggerFormSubmit} />
               )}

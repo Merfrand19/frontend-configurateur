@@ -26,7 +26,7 @@ const schemas = [
       .required("L'année est obligatoire"),
   }),
   Yup.object().shape({
-    origine: Yup.string().required("L'origine est requise"),
+    plaquePhare: Yup.string().required("La plaque Phare est requise"),
     gardeBoue: Yup.string().required("La GardeBoue est requise"),
     moteur: Yup.array()
       .min(1, "Vous devez choisir un moteur")
@@ -68,7 +68,7 @@ const FormPanel = ({ onSubmitRef }) => {
       marque: "",
       modele: "",
       annee: "",
-      origine: "",
+      plaquePhare: "",
       gardeBoue: "",
       moteur: [],
       pseudo: "",
@@ -76,6 +76,7 @@ const FormPanel = ({ onSubmitRef }) => {
       couleur: "",
       finition: "",
       matiere: "",
+      selectedProduct: [],
     },
   });
 
@@ -86,6 +87,7 @@ const FormPanel = ({ onSubmitRef }) => {
       swiperRef.current.swiper.slideTo(newStep);
     }
   };
+  
   const handleStepClick = async (stepId) => {
     if (step > stepId) {
       setStep(stepId);
@@ -120,7 +122,7 @@ const FormPanel = ({ onSubmitRef }) => {
 
   useEffect(() => {
     if (swiperRef.current) {
-      swiperRef.current.swiper.updateAutoHeight(500);
+      swiperRef.current.swiper.updateAutoHeight();
     }
   }, [errors, step]);
 
@@ -174,7 +176,7 @@ const FormPanel = ({ onSubmitRef }) => {
             className={`py-2 px-4 rounded ${
               step > 0
                 ? "bg-gray-300 text-black"
-                : "bg-gray-200 text-gray-500 cursor-not-allowed"
+                : "bg-gray-200 text-gray-500 cursor-not-allowed invisible"
             }`}
           >
             Précédent
@@ -215,3 +217,15 @@ const FormPanel = ({ onSubmitRef }) => {
 };
 
 export default FormPanel;
+
+
+
+
+
+
+
+
+
+
+
+
