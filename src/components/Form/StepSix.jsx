@@ -32,6 +32,13 @@ const GET_PRODUCT_DETAILS = gql`
       featuredImage {
         url
       }
+      variants(first: 1) {
+        edges {
+          node {
+            id
+          }
+        }
+      }
     }
   }
 `;
@@ -42,9 +49,9 @@ const StepSix = ({ control, errors }) => {
   const [products, setProducts] = useState([]);
 
   useEffect(() => {
-    const extractNumericId = (globalId) => {
-      const match = globalId.match(/Product\/(\d+)/);
-      return match ? match[1] : globalId; // Retourne l'ID numérique ou le globalId si pas de correspondance
+    const extractIdFromGid = (gid) => {
+      const match = gid.match(/\/([^/]+)$/);
+      return match ? match[1] : gid; // Retourne l'ID extrait ou le GID si pas de correspondance
     };
 
     const fetchProductDetails = async (productId) => {
@@ -54,8 +61,12 @@ const StepSix = ({ control, errors }) => {
           variables: { id: productId },
         });
 
+        const variantIdGid =
+          data.product.variants.edges[0]?.node.id || null; // ID de la première variante
+        const variantId = extractIdFromGid(variantIdGid); // Extraction de l'ID
+
         return {
-          id: extractNumericId(data.product.id), // Extraction de l'ID numérique
+          id: variantId, // Utilisation de l'ID de la variante
           name: data.product.title,
           price: `${data.product.priceRange.minVariantPrice.amount} ${data.product.priceRange.minVariantPrice.currencyCode}`,
           image: data.product.featuredImage?.url || "https://via.placeholder.com/150",
@@ -82,7 +93,6 @@ const StepSix = ({ control, errors }) => {
     };
 
     loadProducts();
-    console.log("products", products)
   }, [data, client]);
 
   if (loading) return <p>Chargement des options...</p>;

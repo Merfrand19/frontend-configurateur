@@ -10,8 +10,8 @@ import pailleteeImage from '../../assets/Pailletee.png';
 const StepFive = ({ control, errors }) => {
   const materials = [
     { label: 'Basique', value: 'basique', image: basiqueImage, idProduct: '0' },
-    { label: 'Chrome', value: 'chrome', image: chromeImage, idProduct: '8382191435931' },
-    { label: 'Holographique', value: 'holographique', image: holographiqueImage, idProduct: '8382193287899' },
+    { label: 'Chrome', value: 'chrome', image: chromeImage, idProduct: '45982641881243' },
+    { label: 'Holographique', value: 'holographique', image: holographiqueImage, idProduct: '45982638440603' },
   ];
 
   const finishes = [

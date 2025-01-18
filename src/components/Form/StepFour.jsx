@@ -1,5 +1,3 @@
-// src/components/StepFour.jsx
-
 import React, { useEffect, useState } from "react";
 import { useLayoutContext } from "../../context/appContext";
 import { Controller } from "react-hook-form";
@@ -22,6 +20,21 @@ const GET_BIKE_METAOBJECT = gql`
   }
 `;
 
+// Requête GraphQL pour récupérer les variantes d'un produit
+const GET_PRODUCT_VARIANTS = gql`
+  query GetProductVariants($id: ID!) {
+    product(id: $id) {
+      variants(first: 1) {
+        edges {
+          node {
+            id
+          }
+        }
+      }
+    }
+  }
+`;
+
 // Requête GraphQL pour récupérer l'image à partir de son ID
 const GET_IMAGE_SRC = gql`
   query GetImageSrc($id: ID!) {
@@ -37,12 +50,26 @@ const GET_IMAGE_SRC = gql`
 
 const StepFour = ({ control, errors }) => {
   const { setBike } = useLayoutContext();
-  const client = useApolloClient();  // Récupère le client Apollo
+  const client = useApolloClient(); // Récupère le client Apollo
   const { data, loading, error } = useQuery(GET_BIKE_METAOBJECT);
   const [colors, setColors] = useState([]);
-  const [imageSources, setImageSources] = useState({});  // Pour stocker les URLs des images
+  const [imageSources, setImageSources] = useState({}); // Pour stocker les URLs des images
 
-  // Fonction pour récupérer l'URL de l'image à partir de son ID
+  // Fonction pour récupérer l'ID de la variante d'un produit
+  const fetchVariantId = async (productId) => {
+    try {
+      const { data } = await client.query({
+        query: GET_PRODUCT_VARIANTS,
+        variables: { id: `gid://shopify/Product/${productId}` },
+      });
+      const fullVariantId = data.product.variants.edges[0]?.node.id || null;
+      return fullVariantId ? fullVariantId.split("/").pop() : null;
+    } catch (error) {
+      console.error(`Error fetching variants for product ${productId}:`, error);
+      return null;
+    }
+  };
+
   const fetchImageSrc = async (imageId) => {
     try {
       const { data } = await client.query({
@@ -52,46 +79,48 @@ const StepFour = ({ control, errors }) => {
       return data.node.image.src;
     } catch (error) {
       console.log(`Error fetching image with ID ${imageId}:`, error);
-      throw error;  // On relance l'erreur pour pouvoir la capturer plus tard
+      throw error; // On relance l'erreur pour pouvoir la capturer plus tard
     }
   };
 
   useEffect(() => {
     if (data) {
-      // Récupérer les métaobjets et les transformer en un tableau de couleurs dynamiques
-      console.log(data);
-      const bikeColors = data.metaobjects.edges.map(({ node }) => {
-        const color1 = node.fields.find((field) => field.key === "color_1")?.value || "#000000";
-        const color2 = node.fields.find((field) => field.key === "color_2")?.value || "#FFFFFF";
-        const label = node.fields.find((field) => field.key === "label")?.value || "Inconnu";
-        const value = node.fields.find((field) => field.key === "value")?.value || "unknown";
-        const imageId = node.fields.find((field) => field.key === "image")?.value || null;
-        
-        // Extraire l'ID du produit à partir du champ 'product'
-        const productField = node.fields.find((field) => field.key === "product");
-        const idProduct = productField ? productField.value.split("/").pop() : null;
+      const fetchColorsWithVariants = async () => {
+        const bikeColors = await Promise.all(
+          data.metaobjects.edges.map(async ({ node }) => {
+            const color1 = node.fields.find((field) => field.key === "color_1")?.value || "#000000";
+            const color2 = node.fields.find((field) => field.key === "color_2")?.value || "#FFFFFF";
+            const label = node.fields.find((field) => field.key === "label")?.value || "Inconnu";
+            const value = node.fields.find((field) => field.key === "value")?.value || "unknown";
+            const imageId = node.fields.find((field) => field.key === "image")?.value || null;
 
-        return {
-          label,
-          value,
-          imageId,
-          gradient: `linear-gradient(to top right, ${color1} 50%, ${color2})`,
-          idProduct,  // Ajouter l'idProduct
-        };
-      });
+            const productField = node.fields.find((field) => field.key === "product");
+            const productId = productField ? productField.value.split("/").pop() : null;
 
-      console.log("Bike Colors: ", bikeColors);  // Affichage du tableau bikeColors dans la console
-      setColors(bikeColors);
+            // Récupérer l'ID de la variante
+            const variantId = productId ? await fetchVariantId(productId) : null;
+
+            return {
+              label,
+              value,
+              imageId,
+              gradient: `linear-gradient(to top right, ${color1} 50%, ${color2})`,
+              idProduct: variantId, 
+            };
+          })
+        );
+        setColors(bikeColors);
+      };
+
+      fetchColorsWithVariants();
     }
   }, [data]);
 
   useEffect(() => {
-    // Récupérer les URLs des images une fois que les IDs sont disponibles
     colors.forEach(async (color) => {
       if (color.imageId && !imageSources[color.imageId]) {
         try {
           const src = await fetchImageSrc(color.imageId);
-          //console.log(`Image URL for ${color.label}: ${src}`);  // Affiche l'URL de l'image dans la console
           setImageSources((prev) => ({
             ...prev,
             [color.imageId]: src,
