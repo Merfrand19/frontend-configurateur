@@ -44,10 +44,10 @@ const schemas = [
     finition: Yup.string().required("Vous devez sélectionner une finition"),
   }),
   Yup.object().shape({
-    // selectedProduct: Yup.number()
+    // selectedProducts: Yup.number()
     //   .typeError("Vous devez sélectionner un produit valide")
     //   .required("Vous devez sélectionner un produit"),
-    selectedProduct: Yup.array().min(1, "Vous devez choisir un moteur"),
+    selectedProducts: Yup.array().min(1, "Vous devez choisir un moteur"),
   }),
 ];
 
@@ -61,7 +61,6 @@ const FormPanel = ({ onSubmitRef }) => {
     formState: { errors },
     trigger,
     watch,
-    getValues,
   } = useForm({
     resolver: yupResolver(schemas[step]),
     defaultValues: {
@@ -76,7 +75,7 @@ const FormPanel = ({ onSubmitRef }) => {
       couleur: "",
       finition: "",
       matiere: "",
-      selectedProduct: [],
+      selectedProducts: [],
     },
   });
 
@@ -87,7 +86,7 @@ const FormPanel = ({ onSubmitRef }) => {
       swiperRef.current.swiper.slideTo(newStep);
     }
   };
-  
+
   const handleStepClick = async (stepId) => {
     if (step > stepId) {
       setStep(stepId);
@@ -99,13 +98,13 @@ const FormPanel = ({ onSubmitRef }) => {
     }
   };
 
-  const onSubmit = async () => {
+  // eslint-disable-next-line
+  const onSubmit = async (data) => {
     const isValid = await trigger();
     if (isValid) {
       if (step < schemas.length - 1) {
         handleStepChange(step + 1);
       } else {
-        const data = getValues();
         console.log("Données soumises avec React:", data);
         window.top.postMessage(data, "*");
       }
@@ -217,15 +216,3 @@ const FormPanel = ({ onSubmitRef }) => {
 };
 
 export default FormPanel;
-
-
-
-
-
-
-
-
-
-
-
-
