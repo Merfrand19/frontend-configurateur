@@ -37,9 +37,10 @@ body{
   }
 }
 .submit__button {
-  background: radial-gradient(ellipse at 80% 20%, rgba(254, 133, 12, 0.8) 10%, #000000 60%);
+  /* background: radial-gradient(ellipse at 80% 20%, #65C724 10%, #000000 60%); */
+  background-color: #65C724;
   color: white;
-  font-size: 16px;
+  font-size: 18px;
   font-weight: bold;
   border: none;
   border-radius: 6px;
@@ -53,6 +54,9 @@ body{
 .form__input{
   border: 1px solid #E6E6E6;
   background-color: #F7F7F7;
+  padding: 20px;
+  color: #4D4D4D;
+  border-radius: 3px;
 }
 
 .form__input:focus{
@@ -61,6 +65,7 @@ body{
 
 .form_label{
   color: #808080;
+  font-size: 16px;
 }
 .form_h2{
   margin-bottom: 15px;
@@ -81,4 +86,9 @@ body{
   align-items: center;
   justify-content: center;
   overflow: hidden; /* Assurez-vous que le contenu reste bien centré */
+}
+
+.back_button{
+  font-size: 18px;
+  color: #C6C6C6;
 }

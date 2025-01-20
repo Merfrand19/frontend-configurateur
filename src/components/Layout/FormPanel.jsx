@@ -47,7 +47,7 @@ const schemas = [
     // selectedProducts: Yup.number()
     //   .typeError("Vous devez sélectionner un produit valide")
     //   .required("Vous devez sélectionner un produit"),
-    selectedProducts: Yup.array().min(1, "Vous devez choisir un moteur"),
+    // selectedProducts: Yup.array().min(1, "Vous devez choisir un moteur"),
   }),
 ];
 
@@ -97,6 +97,7 @@ const FormPanel = ({ onSubmitRef }) => {
       console.log("erreur");
     }
   };
+
 
   // eslint-disable-next-line
   const onSubmit = async (data) => {
@@ -167,32 +168,32 @@ const FormPanel = ({ onSubmitRef }) => {
           </SwiperSlide>
         </Swiper>
 
-        <div className="flex justify-between mt-4 lg:w-[80%]">
-          <button
-            type="button"
-            onClick={() => handleStepChange(step - 1)}
-            disabled={step <= 0}
-            className={`py-2 px-4 rounded ${
-              step > 0
-                ? "bg-gray-300 text-black"
-                : "bg-gray-200 text-gray-500 cursor-not-allowed invisible"
-            }`}
-          >
-            Précédent
-          </button>
+        <div className="flex justify-between mt-4 lg:w-[80%] sm:gap-0 gap-5">
+        <button
+  type="button"
+  onClick={() => handleStepChange(step - 1)}
+  disabled={step <= 0}
+  className={`py-2 px-4 rounded back_button border w-1/2 sm:w-auto ${
+    step > 0
+      ? "border-#E6E6E6 "
+      : "border-#E6E6E6 text-gray-500 cursor-not-allowed invisible"
+  }`}
+>
+  Précédent
+</button>
+
           <button
             type="button"
             onClick={handleSubmit(onSubmit)}
-            className="py-2 px-4 rounded submit__button"
+            className="py-4 px-5 sm:py-2 sm:px-4 rounded w-1/2 sm:w-auto submit__button"
           >
             {step === schemas.length - 1 ? "Terminer" : "Suivant"}
           </button>
         </div>
       </div>
       <div className="hidden lg:flex lg:w-[6%] lg:h-full relative ">
-        {/* <div className="absolute top-1/2 -translate-y-1/2 w-full h-[50%] rounded-full bg-[#D9D9D9]"></div> */}
         <div
-          className="absolute top-1/2 -translate-y-1/2 w-full h-[50%] bg-gray-300"
+          className="absolute top-1/2 -translate-y-1/2 w-full h-[50%] bg-[#F7F7F7]"
           style={{
             borderTopLeftRadius: "20px",
             borderTopRightRadius: "-50px",
@@ -200,7 +201,7 @@ const FormPanel = ({ onSubmitRef }) => {
             borderBottomRightRadius: "-10px",
           }}
         ></div>
-        <div className="absolute top-0 right-0 w-1/3 h-full bg-[#D9D9D9] z-0"></div>
+        <div className="absolute top-0 right-0 w-1/3 h-full bg-[#F7F7F7] z-0"></div>
 
         <div className="absolute inset-0 flex flex-col items-center justify-center gap-6 z-10">
           <StepIndicator

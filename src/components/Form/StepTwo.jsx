@@ -37,18 +37,18 @@ const StepTwo = ({ control, errors }) => {
 
   useEffect(() => {
     if (data) {
-      console.log("GraphQL Response:", data);
+      // console.log("GraphQL Response:", data);
   
       // Extraction des options pour Plaque Phare
       const plaquePhare = data.plaquePhare.edges
         .flatMap((edge) => edge.node.fields)
-        .filter((field) => field.key === "name") // Utiliser "name" au lieu de "value"
+        .filter((field) => field.key === "name")
         .map((field) => field.value);
   
       // Extraction des options pour Garde Boue
       const gardeBoue = data.gardeBoue.edges
         .flatMap((edge) => edge.node.fields)
-        .filter((field) => field.key === "name") // Utiliser "name" au lieu de "value"
+        .filter((field) => field.key === "name") 
         .map((field) => field.value);
   
       setPlaquePhareOptions(plaquePhare);
@@ -123,9 +123,9 @@ const StepTwo = ({ control, errors }) => {
           control={control}
           defaultValue={[]}
           render={({ field: { value, onChange } }) => (
-            <div className="flex justify-between">
+            <div className="flex justify-between gap-5">
               {["AM6", "EURO"].map((option, index) => (
-                <label key={index} className="flex items-center space-x-2 form__input w-2/5 p-2 justify-between">
+                <label key={index} className="flex items-center space-x-2 form__input w-1/2 p-2 justify-between">
                   <span>{option}</span>
                   <input
                     type="checkbox"

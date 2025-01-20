@@ -184,7 +184,7 @@ const StepFour = ({ control, errors }) => {
                     </div>
                   )}
                 </div>
-                <p className="text-sm text-center mt-1 font-medium">{color.label}</p>
+                <p className="text-sm text-left w-full mt-1 text-label-text font-medium">{color.label}</p>
               </div>
             ))}
           </div>

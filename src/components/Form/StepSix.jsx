@@ -79,6 +79,7 @@ const StepSix = ({ control, errors }) => {
 
     const loadProducts = async () => {
       if (data) {
+        console.log(data);
         const productsPromises = data.metaobjects.edges.map(async ({ node }) => {
           const productIdField = node.fields.find((field) => field.key === "product");
           if (productIdField) {
@@ -151,8 +152,8 @@ const StepSix = ({ control, errors }) => {
                       </svg>
                     </div>
                   )}
-                  <p className="text-sm text-center mt-2 font-medium">{product.name}</p>
-                  <p className="text-sm text-center text-gray-500">{product.price}</p>
+                  <p className="text-sm text-left w-full mt-2 font-medium text-label-text">{product.name}</p>
+                  <p className="text-sm text-left w-full text-label-text">{product.price}</p>
                 </div>
               );
             })}

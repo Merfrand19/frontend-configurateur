@@ -58,8 +58,8 @@ const StepOne = ({ control, errors }) => {
               {...field}
               id="marque"
               className="form__input p-2 w-full"
-              onBlur={(e) => {
-                field.onBlur();
+              onChange={(e) => {
+                field.onChange(e); 
                 setBrand(e.target.value);
               }}
             >

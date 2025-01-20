@@ -10,9 +10,10 @@ const StepThree = ({ control, errors, watch }) => {
   const numero = watch('numero', '');
 
   useEffect(() => {
-    // Vérifiez si 'numero' a une valeur avant d'exécuter setIdentity
     if (numero) {
       setIdentity(`${pseudo} - ${numero}`);
+    } else {
+      setIdentity(pseudo); 
     }
   }, [pseudo, numero, setIdentity]);  
 
@@ -38,7 +39,7 @@ const StepThree = ({ control, errors, watch }) => {
       </div>
 
       {/* Champ Numéro */}
-      <div className="mb-4">
+      <div className="mb-4 pb-4">
         <label htmlFor="numero" className="block text-sm font-medium form_label">
           Numéro Pilote
         </label>
