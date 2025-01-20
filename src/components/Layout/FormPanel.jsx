@@ -44,7 +44,7 @@ const schemas = [
     finition: Yup.string().required("Vous devez sélectionner une finition"),
   }),
   Yup.object().shape({
-     selectedProducts: Yup.array().min(1, "Vous devez choisir au moins une option"),
+     //selectedProducts: Yup.array().min(1, "Vous devez choisir au moins une option"),
   }),
 ];
 
