@@ -50,12 +50,11 @@ const GET_IMAGE_SRC = gql`
 
 const StepFour = ({ control, errors }) => {
   const { setBike } = useLayoutContext();
-  const client = useApolloClient(); // Récupère le client Apollo
+  const client = useApolloClient(); 
   const { data, loading, error } = useQuery(GET_BIKE_METAOBJECT);
   const [colors, setColors] = useState([]);
   const [imageSources, setImageSources] = useState({}); // Pour stocker les URLs des images
 
-  // Fonction pour récupérer l'ID de la variante d'un produit
   const fetchVariantId = async (productId) => {
     try {
       const { data } = await client.query({

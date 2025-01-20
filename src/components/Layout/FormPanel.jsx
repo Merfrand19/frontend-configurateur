@@ -43,12 +43,9 @@ const schemas = [
     matiere: Yup.string().required("Vous devez sélectionner une matière"),
     finition: Yup.string().required("Vous devez sélectionner une finition"),
   }),
-  Yup.object().shape({
-    // selectedProducts: Yup.number()
-    //   .typeError("Vous devez sélectionner un produit valide")
-    //   .required("Vous devez sélectionner un produit"),
-    // selectedProducts: Yup.array().min(1, "Vous devez choisir un moteur"),
-  }),
+  // Yup.object().shape({
+  //    selectedProducts: Yup.array().min(1, "Vous devez choisir au moins une option"),
+  // }),
 ];
 
 const FormPanel = ({ onSubmitRef }) => {

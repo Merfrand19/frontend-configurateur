@@ -29,11 +29,10 @@ body{
   text-align: center;
 }
 
-/* Styles spécifiques pour les écrans mobiles */
 @media (max-width: 480px) {
   .text-gradient {
-    font-size: 70px; /* Taille réduite sur mobile */
-    font-weight: 800; /* Police plus épaisse sur mobile */
+    font-size: 70px; 
+    font-weight: 800;
   }
 }
 .submit__button {
@@ -46,7 +45,6 @@ body{
   border-radius: 6px;
   padding: 8px 20px;
   cursor: pointer;
-  /* box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5); */
   text-transform: uppercase;
   text-align: center;
 }
@@ -79,13 +77,13 @@ body{
   background-color: #d9d9d9;
   border-top-left-radius: 50px;
   border-bottom-left-radius: 50px;
-  width: 100%; /* Pour prendre la largeur du conteneur parent */
-  height: 100%; /* Pour correspondre à la hauteur de l'écran */
+  width: 100%; 
+  height: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  overflow: hidden; /* Assurez-vous que le contenu reste bien centré */
+  overflow: hidden;
 }
 
 .back_button{
