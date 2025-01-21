@@ -3,8 +3,8 @@ import { ApolloClient, InMemoryCache, HttpLink } from '@apollo/client';
 
 const client = new ApolloClient({
   link: new HttpLink({
-    uri: '/api/shopify',
-    // uri: import.meta.env.VITE_SHOPIFY_GRAPHQL_URI,
+    //uri: '/api/shopify',
+    uri: import.meta.env.VITE_SHOPIFY_GRAPHQL_URI,
     headers: {
       'X-Shopify-Storefront-Access-Token': import.meta.env.VITE_SHOPIFY_STOREFRONT_ACCESS_TOKEN,
       'Content-Type': 'application/json', 
