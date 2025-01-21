@@ -3,7 +3,9 @@ import 'dotenv/config'; // Ajoutez ceci tout en haut du fichier
 export default async function handler(req, res) {
   const API_URL = process.env.VITE_SHOPIFY_GRAPHQL_URI;
   const ACCESS_TOKEN = process.env.VITE_SHOPIFY_STOREFRONT_ACCESS_TOKEN;
-
+     console.log('API_URL:', API_URL);
+     console.log('ACCESS_TOKEN:', ACCESS_TOKEN);
+     
   if (!API_URL || !ACCESS_TOKEN) {
     return res.status(500).json({ error: 'Missing API URL or access token' });
   }
