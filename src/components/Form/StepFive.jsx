@@ -29,14 +29,14 @@ const StepFive = ({ control, errors }) => {
 
   const materials = [
     { label: 'Basique', value: 'basique', image: basiqueImage, idVariant: '0' },
-    { label: 'Chrome', value: 'chrome', image: chromeImage, idVariant: '45982641881243' },
-    { label: 'Holographique', value: 'holographique', image: holographiqueImage, idVariant: '45982638440603' },
+    { label: 'Chrome', value: 'chrome', image: chromeImage, idVariant: '50186864361813' },
+    { label: 'Holographique', value: 'holographique', image: holographiqueImage, idVariant: '50186897031509' },
   ];
 
   const finishes = [
     { label: 'Brillante', value: 'brillante', image: brillanteImage, idVariant: '0' },
-    { label: 'Matte', value: 'matte', image: matteImage, idVariant: '45982626152603' },
-    { label: 'Pailletée', value: 'pailletee', image: pailleteeImage, idVariant: '45982631133339' },
+    { label: 'Matte', value: 'matte', image: matteImage, idVariant: '50186898833749' },
+    { label: 'Pailletée', value: 'pailletee', image: pailleteeImage, idVariant: '50186900963669' },
   ];
 
   useEffect(() => {
