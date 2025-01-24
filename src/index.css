@@ -99,3 +99,28 @@ body{
   color: #C6C6C6;
 }
 
+/* Style de base du select */
+select {
+  appearance: none; /* Supprime le style natif de la flèche */
+  padding-right: 2.5rem; /* Espace pour la flèche */
+  background-color: #f9f9f9;
+  font-size: 1rem; /* Taille du texte */
+  position: relative;
+}
+
+/* Ajout de la flèche */
+select::after {
+  content: "▼"; /* Flèche personnalisée */
+  /* position: absolute;
+  top: 50%;
+  right: 1rem; Décalage du côté droit */
+  transform: translateY(-50%);
+  font-size: 1.25rem; /* Taille de la flèche */
+  color: #6b7280; /* Couleur grise */
+  pointer-events: none; /* Désactive l'interaction avec la flèche */
+}
+
+
+.relative {
+  position: relative;
+}

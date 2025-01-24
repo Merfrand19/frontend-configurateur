@@ -376,7 +376,7 @@ const StepFive = ({ control, errors }) => {
       name={fieldName}
       control={control}
       render={({ field }) => (
-        <div className="flex flex-nowrap justify-start gap-4 mb-6">
+        <div className="flex flex-nowrap justify-start gap-2 mb-6">
           {options.map((option) => {
             const valueToStore = `${option.label} - ${option.idVariant}`;
             const isSelected = field.value === valueToStore;
@@ -388,7 +388,7 @@ const StepFive = ({ control, errors }) => {
             return (
               <div
                 key={option.value}
-                className={`flex flex-col items-center justify-center w-1/3 p-2 cursor-pointer transition-all border rounded-lg ${
+                className={`flex flex-col items-center justify-center w-1/3 p-1 cursor-pointer transition-all border rounded-lg ${
                   isSelected ? 'border-black shadow-lg scale-105' : 'border-gray-300'
                 }`}
                 role="radio"

@@ -20,7 +20,9 @@ const VisualPanel = ({ triggerFormSubmit, setIsVisualExpanded, isVisualExpanded 
         <div className="flex flex-col items-center w-full bottom-0">
           <div className="flex flex-col items-center relative">
             <p className="text-bl-doe absolute top-6 text-xl font-medium">{identity}</p>
-            <h1 className=" text-black text-futura text-gradient absolute top-10">{brand}</h1>
+            <h1 className={`text-black text-futura text-gradient absolute top-10 ${ brand ? 'animate-slideUp' : 'opacity-0'}`}>
+              {brand}
+            </h1>
             <div className="flex justify-center z-10">
               <img src={bike} alt="Bike" className="bike md:w-[100%] lg:w-[80%]" />
             </div>

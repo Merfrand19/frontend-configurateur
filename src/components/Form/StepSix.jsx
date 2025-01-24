@@ -106,14 +106,14 @@ const StepSix = ({ control, errors }) => {
         name="selectedProducts"
         control={control}
         render={({ field }) => (
-          <div className="p-2 grid grid-cols-2 md:grid-cols-3 gap-4 mb-6">
+          <div className="p-2 grid grid-cols-2 md:grid-cols-3 gap-2 mb-6">
             {products.map((product) => {
               const isSelected = field.value?.includes(product.id);
 
               return (
                 <div
                   key={product.id}
-                  className={`p-2 relative flex flex-col items-center justify-center cursor-pointer transition-all border rounded-lg ${
+                  className={`p-1 relative flex flex-col items-center justify-center cursor-pointer transition-all border rounded-lg ${
                     isSelected ? "border-black shadow-lg scale-105" : "border-gray-300"
                   }`}
                   role="checkbox"

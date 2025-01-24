@@ -142,11 +142,11 @@ const StepFour = ({ control, errors }) => {
         name="couleur"
         control={control}
         render={({ field }) => (
-          <div className="grid grid-cols-4 gap-3 ">
+          <div className="grid grid-cols-4 gap-2 ">
             {colors.map((color) => (
               <div
                 key={color.idProduct}
-                className={`flex flex-col items-center justify-center cursor-pointer transition-all border rounded-lg p-2 ${
+                className={`flex flex-col items-center justify-center cursor-pointer transition-all border rounded-lg p-1 ${
                   field.value === color.idProduct ? "border-black shadow-lg scale-105" : "border-gray-300"
                 }`}
                 role="radio"

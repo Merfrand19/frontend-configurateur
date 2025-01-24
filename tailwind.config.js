@@ -20,6 +20,15 @@ export default {
         'black-input-value': '#4D4D4D',
         'icon-color': '#B3B3B3',
         'scroll-bar': '#C7C7C7',
+      },
+      keyframes: {
+        slideUp: {
+          '0%': { transform: 'translateY(50%)', opacity: 0 },
+          '100%': { transform: 'translateY(0)', opacity: 1 },
+        }
+      },
+      animation: {
+        slideUp: 'slideUp 0.5s ease-out',
       }
     },
   },
