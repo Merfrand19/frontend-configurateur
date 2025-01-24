@@ -67,7 +67,7 @@ const StepOne = ({ control, errors }) => {
                   setBrand(e.target.value);
                 }}
               >
-                <option value="">Sélectionnez une marque</option>
+                <option value="">Marque</option>
                 {brands.map((brand, index) => (
                   <option key={index} value={brand}>
                     {brand}

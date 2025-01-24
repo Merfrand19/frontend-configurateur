@@ -420,7 +420,7 @@ const StepTwo = ({ control, errors }) => {
           defaultValue=""
           render={({ field }) => (
             <><select {...field} id="plaquePhare" className="form__input p-2 w-full">
-              <option value="">Sélectionnez une plaque phare</option>
+              <option value="">Plaque phare</option>
               {plaquePhareOptions.map((option, index) => (
                 <option key={index} value={option}>
                   {option}
@@ -445,7 +445,7 @@ const StepTwo = ({ control, errors }) => {
           defaultValue=""
           render={({ field }) => (
             <><select {...field} id="gardeBoue" className="form__input p-2 w-full">
-              <option value="">Sélectionnez un garde boue</option>
+              <option value="">Garde boue</option>
               {gardeBoueOptions.map((option, index) => (
                 <option key={index} value={option}>
                   {option}
