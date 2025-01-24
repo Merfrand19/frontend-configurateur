@@ -7,7 +7,7 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        futura: ['Futura', 'sans-serif'],
+        futura: ['Futura','sans-serif'],
         poppins: ['Poppins', 'sans-serif'],
       },
       colors: {
