@@ -418,7 +418,7 @@ const StepFive = ({ control, errors }) => {
                     </div>
                   )}
                 </div>
-                <p className="text-sm text-[13px] md:text-[15px] xl:text-[18px] text-left w-full mt-1 font-medium text-label-text">
+                <p className="text-sm text-[11px] md:text-[15px] xl:text-[18px] text-left w-full mt-1 font-medium text-label-text">
                   {option.label}
                 </p>
                 <p
