@@ -7,8 +7,8 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        poppins: ['Poppins', 'sans-serif'],
         futura: ['Futura', 'sans-serif'],
+        poppins: ['Poppins', 'sans-serif'],
       },
       colors: {
         'label-text': '#808080',
@@ -28,7 +28,7 @@ export default {
         }
       },
       animation: {
-        slideUp: 'slideUp 0.5s ease-out',
+        slideUp: 'slideUp 0.3s ease-out',
       }
     },
   },
