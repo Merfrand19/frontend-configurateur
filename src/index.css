@@ -13,24 +13,6 @@ body{
     width: 100%;
     overflow: auto;
 }
-.text-gradient {
-  font-size: 120px;
-  font-family: "futura" !important ;
-  font-weight: bold;
-  text-transform: uppercase;
-  background: linear-gradient(
-    to right,
-    rgba(0, 0, 0, 0.2) 10%,
-    rgba(0, 0, 0, 0.5) 30%,
-    rgba(0, 0, 0, 1) 50%,
-    rgba(0, 0, 0, 0.5) 70%,
-    rgba(0, 0, 0, 0.1) 90%
-  );
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  text-align: center;
-}
-
 @media (max-width: 480px) {
   .text-gradient {
     font-size: 90px; 
@@ -97,4 +79,22 @@ body{
 .back_button{
   font-size: 18px;
   color: #C6C6C6;
+}
+
+.text-gradient {
+  font-size: 120px;
+  font-family: "futura" !important;
+  font-weight: bold;
+  text-transform: uppercase;
+  background: linear-gradient(
+    to right,
+    rgba(0, 0, 0, 0.2) 10%,
+    rgba(0, 0, 0, 0.5) 30%,
+    rgba(0, 0, 0, 1) 50%,
+    rgba(0, 0, 0, 0.5) 70%,
+    rgba(0, 0, 0, 0.1) 90%
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-align: center;
 }
