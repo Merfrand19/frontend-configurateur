@@ -1,0 +1,26 @@
+/* Conteneur pour le <select> personnalisé */
+.custom-select-container {
+    position: relative;
+    width: 100%;
+  }
+  
+  /* Styles du <select> */
+  .custom-select {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none; /* Supprime les flèches par défaut */
+  }
+  
+  /* Icône de la flèche */
+  .custom-icon {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    top: 50%;
+    right: 60px; /* Ajuste la position à droite */
+    transform: translateY(-50%);
+    pointer-events: none; /* Empêche l'interaction avec l'icône */
+    font-size: 14px;
+    color: #808080;
+  }
+  
