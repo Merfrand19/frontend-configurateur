@@ -79,7 +79,7 @@ const StepOne = ({ control, errors }) => {
       <div className="mb-4">
         <label
           htmlFor="modele"
-          className="block text-sm font-medium form_label"
+          className="block text-sm mb-2 font-medium form_label"
         >
           Modèle
         </label>
@@ -96,7 +96,7 @@ const StepOne = ({ control, errors }) => {
       </div>
 
       <div className="mb-4">
-        <label htmlFor="annee" className="block text-sm font-medium form_label">
+        <label htmlFor="annee" className="block text-sm mb-2 font-medium form_label">
           Année
         </label>
         <Controller

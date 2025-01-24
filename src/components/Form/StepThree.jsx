@@ -23,7 +23,7 @@ const StepThree = ({ control, errors, watch }) => {
 
       {/* Champ Pseudo */}
       <div className="mb-4">
-        <label htmlFor="pseudo" className="block text-sm font-medium form_label">
+        <label htmlFor="pseudo" className="block text-sm mb-2 font-medium form_label">
           Pseudo Pilote
         </label>
         <Controller
@@ -40,7 +40,7 @@ const StepThree = ({ control, errors, watch }) => {
 
       {/* Champ Numéro */}
       <div className="mb-4 pb-4">
-        <label htmlFor="numero" className="block text-sm font-medium form_label">
+        <label htmlFor="numero" className="block text-sm mb-2 font-medium form_label">
           Numéro Pilote
         </label>
         <Controller

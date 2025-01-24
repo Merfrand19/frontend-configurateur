@@ -142,11 +142,11 @@ const StepFour = ({ control, errors }) => {
         name="couleur"
         control={control}
         render={({ field }) => (
-          <div className="grid grid-cols-4 gap-3">
+          <div className="grid grid-cols-4 gap-3 ">
             {colors.map((color) => (
               <div
                 key={color.idProduct}
-                className={`flex flex-col items-center justify-center cursor-pointer transition-all border rounded-lg p-1 ${
+                className={`flex flex-col items-center justify-center cursor-pointer transition-all border rounded-lg p-2 ${
                   field.value === color.idProduct ? "border-black shadow-lg scale-105" : "border-gray-300"
                 }`}
                 role="radio"
@@ -167,7 +167,7 @@ const StepFour = ({ control, errors }) => {
                   className="w-full h-20 rounded-md relative"
                   style={{
                     background: color.gradient,
-                    borderRadius: "8px",
+                    borderRadius: "3px",
                   }}
                 >
                   {field.value === color.idProduct && (
@@ -183,7 +183,7 @@ const StepFour = ({ control, errors }) => {
                     </div>
                   )}
                 </div>
-                <p className="text-sm text-left w-full mt-1 text-label-text font-medium">{color.label}</p>
+                <p className="text-sm text-[13px] md:text-[15px] xl:text-[18px] text-left w-full mt-1 text-label-text font-medium">{color.label}</p>
               </div>
             ))}
           </div>

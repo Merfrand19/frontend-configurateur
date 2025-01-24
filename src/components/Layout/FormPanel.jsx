@@ -28,9 +28,7 @@ const schemas = [
   Yup.object().shape({
     plaquePhare: Yup.string().required("La plaque Phare est requise"),
     gardeBoue: Yup.string().required("La GardeBoue est requise"),
-    moteur: Yup.array()
-      .min(1, "Vous devez choisir un moteur")
-      .max(1, "Vous devez choisir un seul moteur"),
+    moteur: Yup.string().required("Vous devez choisir un moteur")
   }),
   Yup.object().shape({
     pseudo: Yup.string().required("Le pseudo est requis"),

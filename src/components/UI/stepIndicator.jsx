@@ -33,7 +33,8 @@ const StepIndicator = ({ currentStep, setCurrentStep, direction = 'vertical', co
           key={step.id}
           src={currentStep >= step.id ? step.iconOld : step.icon}
           alt={`Step ${step.id + 1}`}
-          className={`w-8 h-8 transition-all duration-300 lg:w-6 lg:h-6`}
+          // className={`w-8 h-8 transition-all duration-300 lg:w-6 lg:h-6`}
+          className="w-5 h-5 transition-all duration-300 lg:w-6 lg:h-6"
           style={{
             cursor: currentStep >= step.id ? 'pointer' : 'not-allowed',
             filter:

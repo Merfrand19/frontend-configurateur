@@ -8,6 +8,7 @@ export default {
     extend: {
       fontFamily: {
         poppins: ['Poppins', 'sans-serif'],
+        futura: ['Futura', 'sans-serif'],
       },
       colors: {
         'label-text': '#808080',

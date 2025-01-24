@@ -79,7 +79,6 @@ const StepSix = ({ control, errors }) => {
 
     const loadProducts = async () => {
       if (data) {
-        console.log(data);
         const productsPromises = data.metaobjects.edges.map(async ({ node }) => {
           const productIdField = node.fields.find((field) => field.key === "product");
           if (productIdField) {
@@ -107,14 +106,14 @@ const StepSix = ({ control, errors }) => {
         name="selectedProducts"
         control={control}
         render={({ field }) => (
-          <div className="grid grid-cols-2 md:grid-cols-3 gap-4 mb-6">
+          <div className="p-2 grid grid-cols-2 md:grid-cols-3 gap-4 mb-6">
             {products.map((product) => {
               const isSelected = field.value?.includes(product.id);
 
               return (
                 <div
                   key={product.id}
-                  className={`flex flex-col items-center justify-center cursor-pointer transition-all border rounded-lg ${
+                  className={`p-2 relative flex flex-col items-center justify-center cursor-pointer transition-all border rounded-lg ${
                     isSelected ? "border-black shadow-lg scale-105" : "border-gray-300"
                   }`}
                   role="checkbox"
@@ -135,25 +134,31 @@ const StepSix = ({ control, errors }) => {
                     }
                   }}
                 >
-                  <img
-                    src={product.image}
-                    alt={product.name}
-                    className="w-full h-24 object-cover rounded-lg"
-                  />
-                  {isSelected && (
-                    <div className="absolute top-2 right-2 bg-white shadow-md">
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        fill="currentColor"
-                        viewBox="0 0 16 16"
-                        className="w-5 h-5 text-black"
-                      >
-                        <path d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-4 5a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 0 1 1.06-1.06l1.94 1.94 3.64-4.293z" />
-                      </svg>
-                    </div>
-                  )}
-                  <p className="text-sm text-left w-full mt-2 font-medium text-label-text">{product.name}</p>
-                  <p className="text-sm text-left w-full text-label-text">{product.price}</p>
+                  <div
+                    className="w-full h-36 relative overflow-hidden"
+                    style={{
+                      backgroundImage: `url(${product.image})`,
+                      backgroundSize: "cover",
+                      backgroundPosition: "center",
+                      borderRadius: "3px",
+                    }}
+                  >
+                    {isSelected && (
+                      <div className="absolute top-2 right-2 bg-white shadow-md">
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          fill="currentColor"
+                          viewBox="0 0 16 16"
+                          className="w-5 h-5 text-black"
+                        >
+                          <path d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-4 5a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 0 1 1.06-1.06l1.94 1.94 3.64-4.293z" />
+                        </svg>
+                      </div>
+                    )}
+                  </div>
+
+                  <p className="mt-2 text-sm text-[13px] md:text-[15px] xl:text-[18px] text-left w-full font-medium text-label-text">{product.name}</p>
+                  <p className="text-sm text-[13px] md:text-[15px] xl:text-[18px] text-left w-full text-label-text">{product.price}</p>
                 </div>
               );
             })}
