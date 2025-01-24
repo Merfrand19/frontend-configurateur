@@ -13,18 +13,6 @@ body{
     width: 100%;
     overflow: auto;
 }
-@media (max-width: 480px) {
-  .text-gradient {
-    font-size: 90px; 
-    font-weight: 800;
-  }
-}
-
-@media (min-width: 640px) {
-  .submit__button, .back_button{
-     padding: 12px 32px !important;
-  }
-}
 .submit__button {
   /* background: radial-gradient(ellipse at 80% 20%, #65C724 10%, #000000 60%); */
   background-color: #65C724;
@@ -97,4 +85,16 @@ body{
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   text-align: center;
+}
+@media (max-width: 480px) {
+  .text-gradient {
+    font-size: 90px; 
+    font-weight: 800;
+  }
+}
+
+@media (min-width: 640px) {
+  .submit__button, .back_button{
+     padding: 12px 32px !important;
+  }
 }
