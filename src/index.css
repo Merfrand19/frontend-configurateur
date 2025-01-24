@@ -15,7 +15,7 @@ body{
 }
 .text-gradient {
   font-size: 120px;
-  font-family: "futura" !important;
+  font-family: "futura", sans-serif !important;
   font-weight: bold;
   text-transform: uppercase;
   background: linear-gradient(
