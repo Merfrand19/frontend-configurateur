@@ -115,7 +115,7 @@ const StepFive = ({ control, errors }) => {
                   {option.label}
                 </p>
                 <p
-                  className={`text-left w-full text-label-text ${!isPriceVisible ? 'invisible' : ''}`}
+                  className={`text-[11px] md:text-[15px] xl:text-[18px] text-left w-full text-label-text ${!isPriceVisible ? 'invisible' : ''}`}
                 >
                   {isPriceVisible ? price : 'Chargement...'}
                 </p>
