@@ -183,14 +183,14 @@ const StepFour = ({ control, errors }) => {
                     </div>
                   )}
                 </div>
-                <p className="text-sm text-[11px] md:text-[15px] xl:text-[18px] text-left w-full mt-1 text-label-text font-medium">{color.label}</p>
+                <p className="text-[11px] md:text-[15px] xl:text-[18px] text-left w-full mt-1 text-label-text font-medium">{color.label}</p>
               </div>
             ))}
           </div>
         )}
       />
       {errors.couleur && (
-        <p className="text-red-500 text-sm mt-1">{errors.couleur.message}</p>
+        <p className="text-red-500 mt-1">{errors.couleur.message}</p>
       )}
     </div>
   );

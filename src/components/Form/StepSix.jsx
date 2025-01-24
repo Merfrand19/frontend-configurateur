@@ -157,8 +157,8 @@ const StepSix = ({ control, errors }) => {
                     )}
                   </div>
 
-                  <p className="mt-2 text-sm text-[11px] md:text-[15px] xl:text-[18px] text-left w-full font-medium text-label-text">{product.name}</p>
-                  <p className="text-sm text-[11px] md:text-[15px] xl:text-[18px] text-left w-full text-label-text">{product.price}</p>
+                  <p className="mt-2 text-[11px] md:text-[15px] xl:text-[18px] text-left w-full font-medium text-label-text">{product.name}</p>
+                  <p className="text-[11px] md:text-[15px] xl:text-[18px] text-left w-full text-label-text">{product.price}</p>
                 </div>
               );
             })}
