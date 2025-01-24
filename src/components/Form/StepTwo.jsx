@@ -348,6 +348,7 @@
 import React, { useState, useEffect } from "react";
 import { Controller } from "react-hook-form";
 import { gql, useQuery } from "@apollo/client";
+import * as Icon from 'react-bootstrap-icons';
 
 // Requête GraphQL pour récupérer les metaobjects Garde Boue et Plaque Phare
 const GET_CARENAGES = gql`
@@ -409,7 +410,7 @@ const StepTwo = ({ control, errors }) => {
       <h2 className="form_h2">Carénages</h2>
 
       {/* Champ Plaque Phare */}
-      <div className="mb-4">
+      <div className="mb-4 custom-select-container">
         <label htmlFor="plaquePhare" className="block text-sm font-medium mb-2 form_label">
           Plaque Phare
         </label>
@@ -418,14 +419,14 @@ const StepTwo = ({ control, errors }) => {
           control={control}
           defaultValue=""
           render={({ field }) => (
-            <select {...field} id="plaquePhare" className="form__input p-2 w-full">
+            <><select {...field} id="plaquePhare" className="form__input p-2 w-full">
               <option value="">Sélectionnez une plaque phare</option>
               {plaquePhareOptions.map((option, index) => (
                 <option key={index} value={option}>
                   {option}
                 </option>
               ))}
-            </select>
+            </select><Icon.ChevronDown className="custom-icon ChevronDown-2" /></>
           )}
         />
         {errors.plaquePhare && (
@@ -434,7 +435,7 @@ const StepTwo = ({ control, errors }) => {
       </div>
 
       {/* Champ Garde Boue */}
-      <div className="mb-4">
+      <div className="mb-4 custom-select-container" >
         <label htmlFor="gardeBoue" className="block text-sm font-medium mb-2 form_label">
           Garde Boue
         </label>
@@ -443,14 +444,14 @@ const StepTwo = ({ control, errors }) => {
           control={control}
           defaultValue=""
           render={({ field }) => (
-            <select {...field} id="gardeBoue" className="form__input p-2 w-full">
+            <><select {...field} id="gardeBoue" className="form__input p-2 w-full">
               <option value="">Sélectionnez un garde boue</option>
               {gardeBoueOptions.map((option, index) => (
                 <option key={index} value={option}>
                   {option}
                 </option>
               ))}
-            </select>
+            </select><Icon.ChevronDown className="custom-icon ChevronDown-2" /></>
           )}
         />
         {errors.gardeBoue && (
@@ -460,7 +461,7 @@ const StepTwo = ({ control, errors }) => {
 
       {/* Champ Moteur */}
       {/* Champ Moteur */}
-<div className="mb-6">
+<div className="mb-6 ">
   <label className="block text-sm font-medium mb-2 form_label">Moteur</label>
   <Controller
     name="moteur"

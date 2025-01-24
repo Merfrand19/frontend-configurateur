@@ -104,7 +104,7 @@ body{
 }
 
 /* Styles du <select> */
-.custom-select {
+select {
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none; /* Supprime les flèches par défaut */
@@ -116,9 +116,13 @@ body{
   width: 20px;
   height: 20px;
   top: 50%;
-  right: 60px; /* Ajuste la position à droite */
+  right: 40px; /* Ajuste la position à droite */
   transform: translateY(-50%);
   pointer-events: none; /* Empêche l'interaction avec l'icône */
   font-size: 14px;
   color: #808080;
+}
+
+.ChevronDown-2{
+  top: 65%;
 }
