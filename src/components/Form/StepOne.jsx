@@ -128,7 +128,6 @@ import { Controller } from "react-hook-form";
 import { useLayoutContext } from "../../context/appContext";
 import { gql, useQuery } from "@apollo/client";
 import * as Icon from 'react-bootstrap-icons';
-import "../../assets/styles/StepOne.css"; // Inclure le CSS personnalisé
 
 const GET_BRANDS = gql`
   query {

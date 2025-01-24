@@ -97,20 +97,28 @@ body{
   }
 }
 
-select{
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  -o-appearance: none;
+
+.custom-select-container {
+  position: relative;
+  width: 100%;
 }
 
-select + i.fa {
-  float: right;
-  margin-top: -30px;
-  margin-right: 5px;
-  /* this is so when you click on the chevron, your click actually goes on the dropdown menu */
-  pointer-events: none;
-  /* everything after this is just to cover up the original arrow */
-  /* (for browsers that don't support the syntax used above) */
-  background-color: #fff;
-  padding-right: 5px;
+/* Styles du <select> */
+.custom-select {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none; /* Supprime les flèches par défaut */
+}
+
+/* Icône de la flèche */
+.custom-icon {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  top: 50%;
+  right: 60px; /* Ajuste la position à droite */
+  transform: translateY(-50%);
+  pointer-events: none; /* Empêche l'interaction avec l'icône */
+  font-size: 14px;
+  color: #808080;
 }
