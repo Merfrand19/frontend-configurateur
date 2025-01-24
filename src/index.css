@@ -10,8 +10,25 @@ body{
 }
 #root{
   height: 100%;
-    width: 100%;
-    overflow: auto;
+  width: 100%;
+  overflow: auto;
+}
+.text-gradient {
+  font-size: 120px;
+  font-family: "futura" !important;
+  font-weight: bold;
+  text-transform: uppercase;
+  background: linear-gradient(
+    to right,
+    rgba(0, 0, 0, 0.2) 10%,
+    rgba(0, 0, 0, 0.5) 30%,
+    rgba(0, 0, 0, 1) 50%,
+    rgba(0, 0, 0, 0.5) 70%,
+    rgba(0, 0, 0, 0.1) 90%
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-align: center;
 }
 .submit__button {
   /* background: radial-gradient(ellipse at 80% 20%, #65C724 10%, #000000 60%); */
@@ -67,24 +84,6 @@ body{
 .back_button{
   font-size: 18px;
   color: #C6C6C6;
-}
-
-.text-gradient {
-  font-size: 120px;
-  font-family: "futura" !important;
-  font-weight: bold;
-  text-transform: uppercase;
-  background: linear-gradient(
-    to right,
-    rgba(0, 0, 0, 0.2) 10%,
-    rgba(0, 0, 0, 0.5) 30%,
-    rgba(0, 0, 0, 1) 50%,
-    rgba(0, 0, 0, 0.5) 70%,
-    rgba(0, 0, 0, 0.1) 90%
-  );
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  text-align: center;
 }
 @media (max-width: 480px) {
   .text-gradient {
