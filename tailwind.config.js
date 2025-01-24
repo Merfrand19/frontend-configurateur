@@ -23,7 +23,7 @@ export default {
       },
       keyframes: {
         slideUp: {
-          '0%': { transform: 'translateY(50%)', opacity: 0 },
+          '0%': { transform: 'translateY(50%)', opacity: 0, fontFamily: 'Futura' },
           '100%': { transform: 'translateY(0)', opacity: 1 },
         }
       },
